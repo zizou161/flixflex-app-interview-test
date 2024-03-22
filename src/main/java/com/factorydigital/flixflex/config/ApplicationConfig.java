@@ -17,11 +17,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private UserDetailsRepository userDetailsRepository;
+    private final UserDetailsRepository repository;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userDetailsRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("user not found"));
+        return username -> repository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean
@@ -41,4 +42,5 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
