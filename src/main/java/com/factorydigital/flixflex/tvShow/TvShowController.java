@@ -20,4 +20,10 @@ public class TvShowController {
     public ResponseEntity<Iterable<TvShow>> getAll() {
         return ResponseEntity.ok(tvShowService.getAll());
     }
+    @GetMapping(path = "/top5")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "returns list of top 5 series ordered by popularity")
+    public ResponseEntity<Iterable<TvShow>> getTop5ByPopularity(){
+        return ResponseEntity.ok(tvShowService.getTop5ByPopularity());
+    }
 }

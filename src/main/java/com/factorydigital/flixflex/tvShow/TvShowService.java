@@ -12,4 +12,8 @@ public class TvShowService {
     public Iterable<TvShow> getAll() {
         return tvShowsRepository.findAll();
     }
+
+    public Iterable<TvShow> getTop5ByPopularity() {
+        return tvShowsRepository.findTop5ByOrderByPopularityDesc();
+    }
 }
