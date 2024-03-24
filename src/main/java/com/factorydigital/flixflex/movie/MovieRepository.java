@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>, CrudRepository<Movie, Long> {
 
     public Iterable<Movie> findTop5ByOrderByPopularityDesc();
+    public Iterable<Movie> findMoviesByTitleContainingIgnoreCase(String title);
 }

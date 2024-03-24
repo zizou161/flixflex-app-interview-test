@@ -41,4 +41,11 @@ public class MovieController {
     public ResponseEntity<Movie> getOne(@PathVariable(name = "movieId") Long movieId) {
         return ResponseEntity.ok(movieService.getMovie(movieId));
     }
+
+    @GetMapping("/search")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "search movies by title containing")
+    public ResponseEntity<Iterable<Movie>> searchMovie(@RequestParam String title) {
+        return ResponseEntity.ok(movieService.searchMoviesByTitle(title));
+    }
 }
