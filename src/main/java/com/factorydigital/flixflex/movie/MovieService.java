@@ -12,4 +12,8 @@ public class MovieService {
     public Iterable<Movie> getAll() {
         return movieRepository.findAll();
     }
+
+    public Iterable<Movie> getTop5ByPopularity() {
+        return movieRepository.findTop5ByOrderByPopularityDesc();
+    }
 }

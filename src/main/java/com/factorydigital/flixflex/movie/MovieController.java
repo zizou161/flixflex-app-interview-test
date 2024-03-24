@@ -21,4 +21,10 @@ public class MovieController {
     public ResponseEntity<Iterable<Movie>> getAll() {
         return ResponseEntity.ok(movieService.getAll());
     }
+    @GetMapping(path = "/top5")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "returns list of top 5 movies ordered by popularity")
+    public ResponseEntity<Iterable<Movie>> getTop5ByPopularity() {
+        return ResponseEntity.ok(movieService.getTop5ByPopularity());
+    }
 }
