@@ -51,12 +51,23 @@ public class UserProfileController {
         return ResponseEntity.ok(userProfileService.getTvShowFavorites().stream().map(tvShowMapper::toDto).toList());
     }
 
-    @DeleteMapping
+    @DeleteMapping(path = "/favorites/movie")
     @SecurityRequirement(name = "Bearer Authorization")
     @Operation(summary = "remove a movie from favorites")
     public ResponseEntity<UserProfileDto> removeMovieFromFavorites(@RequestParam Long movieId) {
         try {
             return ResponseEntity.ok(userProfileMapper.toDto(userProfileService.removeMovieFromFavorites(movieId)));
+        } catch (UserPrincipalNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @DeleteMapping(path = "/favorites/tvShow")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "remove a tv show from favorites")
+    public ResponseEntity<UserProfileDto> removeTvShowFromFavorites(@RequestParam Long tvShowId) {
+        try {
+            return ResponseEntity.ok(userProfileMapper.toDto(userProfileService.removeTvShowFromFavorites(tvShowId)));
         } catch (UserPrincipalNotFoundException e) {
             throw new RuntimeException(e);
         }
