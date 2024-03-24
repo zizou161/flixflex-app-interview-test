@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,5 +48,12 @@ public class UserProfileService {
         UserProfile userProfile = getCurrentUserProfile().orElseThrow(() -> new UserPrincipalNotFoundException("user not found"));
         userProfile.getFavoriteTvShows().add(tvShow);
         return userProfileRepository.save(userProfile);
+    }
+
+    public List<Movie> getMovieFavorites() throws UserPrincipalNotFoundException {
+        UserProfile userProfile = getCurrentUserProfile().orElseThrow(() -> new UserPrincipalNotFoundException("user not found"));
+        return userProfile.getFavoriteMovies();
+
+
     }
 }
