@@ -61,4 +61,11 @@ public class UserProfileService {
         UserProfile userProfile = getCurrentUserProfile().orElseThrow(() -> new UserPrincipalNotFoundException("user not found"));
         return userProfile.getFavoriteTvShows();
     }
+
+    public UserProfile removeMovieFromFavorites(Long movieId) throws UserPrincipalNotFoundException {
+        UserProfile userProfile = getCurrentUserProfile().orElseThrow(() -> new UserPrincipalNotFoundException("user not found"));
+        userProfile.getFavoriteMovies().removeIf(m -> m.getId().equals(movieId));
+        userProfileRepository.save(userProfile);
+        return userProfile;
+    }
 }

@@ -8,10 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
@@ -52,5 +49,16 @@ public class UserProfileController {
     @Operation(summary = "show tv shows favorite list")
     public ResponseEntity<List<TvShowDto>> getTvShowFavorites() throws UserPrincipalNotFoundException {
         return ResponseEntity.ok(userProfileService.getTvShowFavorites().stream().map(tvShowMapper::toDto).toList());
+    }
+
+    @DeleteMapping
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "remove a movie from favorites")
+    public ResponseEntity<UserProfileDto> removeMovieFromFavorites(@RequestParam Long movieId) {
+        try {
+            return ResponseEntity.ok(userProfileMapper.toDto(userProfileService.removeMovieFromFavorites(movieId)));
+        } catch (UserPrincipalNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
