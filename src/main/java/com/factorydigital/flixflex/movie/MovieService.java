@@ -23,4 +23,8 @@ public class MovieService {
         PageRequest pageRequest = PageRequest.of(pageNumber, 10);
         return movieRepository.findAll(pageRequest);
     }
+
+    public Movie getMovie(Long movieId) {
+        return movieRepository.findById(movieId).orElse(null);
+    }
 }
