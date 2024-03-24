@@ -1,24 +1,25 @@
-package com.factorydigital.flixflex.movie;
+package com.factorydigital.flixflex.tvShow;
 
 import lombok.Data;
 
 import java.util.ArrayList;
 
 @Data
-public class MovieDto {
+public class TvShowDto {
 
-    private boolean adult;
+    private Boolean adult;
     private String backdrop_path;
     private ArrayList<Integer> genre_ids;
     private int id;
+    private ArrayList<String> origin_country;
     private String original_language;
-    private String original_title;
+    private String original_name;
     private String overview;
     private double popularity;
     private String poster_path;
-    private String release_date;
-    private String title;
-    private boolean video;
+    private String first_air_date;
+    private String name;
     private double vote_average;
     private int vote_count;
+
 }
