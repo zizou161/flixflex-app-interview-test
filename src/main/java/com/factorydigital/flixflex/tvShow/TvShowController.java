@@ -41,4 +41,11 @@ public class TvShowController {
     public ResponseEntity<TvShow> getAll(@PathVariable(name = "tvShowId") Long tvShowId) {
         return ResponseEntity.ok(tvShowService.getTvShow(tvShowId));
     }
+
+    @GetMapping("/search")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "search for series by name containing")
+    public ResponseEntity<Iterable<TvShow>> searchTvShowByName(@RequestParam String name) {
+        return ResponseEntity.ok(tvShowService.searchTvShowByName(name));
+    }
 }

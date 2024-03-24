@@ -27,4 +27,8 @@ public class TvShowService {
     public TvShow getTvShow(Long tvShowId) {
         return tvShowsRepository.findById(tvShowId).orElse(null);
     }
+
+    public Iterable<TvShow> searchTvShowByName(String name) {
+        return tvShowsRepository.findTvShowsByNameContainingIgnoreCase(name);
+    }
 }
