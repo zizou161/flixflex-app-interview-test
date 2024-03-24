@@ -1,5 +1,6 @@
 package com.factorydigital.flixflex.user;
 
+import com.factorydigital.flixflex.userProfile.UserPofile;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,9 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    UserPofile userPofile;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
