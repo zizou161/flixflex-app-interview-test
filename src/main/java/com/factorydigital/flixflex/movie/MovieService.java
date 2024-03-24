@@ -31,4 +31,8 @@ public class MovieService {
     public Iterable<Movie> searchMoviesByTitle(String title) {
         return movieRepository.findMoviesByTitleContainingIgnoreCase(title);
     }
+
+    public String getMovieTrailerUrl(Long movieId) {
+        return getMovie(movieId).getTrailerUrl();
+    }
 }

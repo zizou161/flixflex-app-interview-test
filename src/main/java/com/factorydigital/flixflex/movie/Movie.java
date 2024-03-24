@@ -12,13 +12,14 @@ public class Movie implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private String original_language;
-    private String original_title;
+    private String originalLanguage;
+    private String originalTitle;
     @Column(columnDefinition = "TEXT")
     private String overview;
     private double popularity;
     private String title;
     private double vote_average;
-    private int vote_count;
+    private int voteCount;
+    private String trailerUrl;
     private boolean adult;
 }

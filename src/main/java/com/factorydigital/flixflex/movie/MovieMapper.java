@@ -11,14 +11,15 @@ public class MovieMapper implements ObjectMapper<Movie, MovieDto> {
     @Override
     public Movie toEntity(MovieDto dto) {
         Movie entity = new Movie();
+        entity.setId(dto.getId());
         entity.setAdult(dto.isAdult());
         entity.setOverview(dto.getOverview());
         entity.setPopularity(dto.getPopularity());
         entity.setTitle(dto.getTitle());
-        entity.setOriginal_language(dto.getOriginal_language());
-        entity.setOriginal_title(dto.getOriginal_title());
+        entity.setOriginalLanguage(dto.getOriginal_language());
+        entity.setOriginalTitle(dto.getOriginal_title());
         entity.setVote_average(dto.getVote_average());
-        entity.setVote_count(dto.getVote_count());
+        entity.setVoteCount(dto.getVote_count());
         return entity;
     }
 
@@ -30,10 +31,10 @@ public class MovieMapper implements ObjectMapper<Movie, MovieDto> {
         dto.setOverview(entity.getOverview());
         dto.setPopularity(entity.getPopularity());
         dto.setTitle(entity.getTitle());
-        dto.setOriginal_language(entity.getOriginal_language());
-        dto.setOriginal_title(entity.getOriginal_title());
+        dto.setOriginal_language(entity.getOriginalLanguage());
+        dto.setOriginal_title(entity.getOriginalTitle());
         dto.setVote_average(entity.getVote_average());
-        dto.setVote_count(entity.getVote_count());
+        dto.setVote_count(entity.getVoteCount());
         return dto;
     }
 }

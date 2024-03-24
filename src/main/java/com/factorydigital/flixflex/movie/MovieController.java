@@ -48,4 +48,11 @@ public class MovieController {
     public ResponseEntity<Iterable<Movie>> searchMovie(@RequestParam String title) {
         return ResponseEntity.ok(movieService.searchMoviesByTitle(title));
     }
+
+    @GetMapping("/{movieId}/trailer")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "get the movie trailer url")
+    public ResponseEntity<String> getMovieTrailerUrl(@PathVariable Long movieId) {
+        return ResponseEntity.ok(movieService.getMovieTrailerUrl(movieId));
+    }
 }
