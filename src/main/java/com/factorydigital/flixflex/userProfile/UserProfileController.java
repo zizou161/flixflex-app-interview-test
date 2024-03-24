@@ -2,6 +2,8 @@ package com.factorydigital.flixflex.userProfile;
 
 import com.factorydigital.flixflex.movie.MovieDto;
 import com.factorydigital.flixflex.movie.MovieMapper;
+import com.factorydigital.flixflex.tvShow.TvShowDto;
+import com.factorydigital.flixflex.tvShow.TvShowMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class UserProfileController {
     private final UserProfileService userProfileService;
     private final UserProfileMapper userProfileMapper;
     private final MovieMapper movieMapper;
+    private final TvShowMapper tvShowMapper;
 
     @GetMapping(path = "/add-movie-to-favorites")
     @SecurityRequirement(name = "Bearer Authorization")
@@ -42,5 +45,12 @@ public class UserProfileController {
     @Operation(summary = "show movies favorite list")
     public ResponseEntity<List<MovieDto>> getMovieFavorites() throws UserPrincipalNotFoundException {
         return ResponseEntity.ok(userProfileService.getMovieFavorites().stream().map(movieMapper::toDto).toList());
+    }
+
+    @GetMapping(path = "/show-tvShow-favorites")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "show tv shows favorite list")
+    public ResponseEntity<List<TvShowDto>> getTvShowFavorites() throws UserPrincipalNotFoundException {
+        return ResponseEntity.ok(userProfileService.getTvShowFavorites().stream().map(tvShowMapper::toDto).toList());
     }
 }

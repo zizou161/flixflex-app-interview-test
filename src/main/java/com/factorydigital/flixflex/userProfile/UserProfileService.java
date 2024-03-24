@@ -56,4 +56,9 @@ public class UserProfileService {
 
 
     }
+
+    public List<TvShow> getTvShowFavorites() throws UserPrincipalNotFoundException {
+        UserProfile userProfile = getCurrentUserProfile().orElseThrow(() -> new UserPrincipalNotFoundException("user not found"));
+        return userProfile.getFavoriteTvShows();
+    }
 }

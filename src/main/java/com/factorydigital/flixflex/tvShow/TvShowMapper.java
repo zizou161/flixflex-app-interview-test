@@ -27,6 +27,7 @@ public class TvShowMapper implements ObjectMapper<TvShow, TvShowDto> {
     @Override
     public TvShowDto toDto(TvShow entity) {
         TvShowDto dto = new TvShowDto();
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setAdult(entity.getAdult());
         dto.setBackdrop_path(entity.getBackdrop_path());

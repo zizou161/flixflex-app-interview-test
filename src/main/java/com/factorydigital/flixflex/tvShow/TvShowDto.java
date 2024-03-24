@@ -11,7 +11,7 @@ public class TvShowDto implements Serializable {
     private Boolean adult;
     private String backdrop_path;
     private ArrayList<Integer> genre_ids;
-    private int id;
+    private Long id;
     private ArrayList<String> origin_country;
     private String original_language;
     private String original_name;

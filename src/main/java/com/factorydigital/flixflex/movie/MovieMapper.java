@@ -25,6 +25,7 @@ public class MovieMapper implements ObjectMapper<Movie, MovieDto> {
     @Override
     public MovieDto toDto(Movie entity) {
         MovieDto dto = new MovieDto();
+        dto.setId(entity.getId());
         dto.setAdult(entity.isAdult());
         dto.setOverview(entity.getOverview());
         dto.setPopularity(entity.getPopularity());
