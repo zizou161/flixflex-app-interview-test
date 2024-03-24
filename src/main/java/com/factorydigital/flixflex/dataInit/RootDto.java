@@ -1,12 +1,15 @@
 package com.factorydigital.flixflex.dataInit;
 
-import java.util.ArrayList;
+import com.factorydigital.flixflex.movie.MovieDto;
+import lombok.Data;
 
+import java.util.ArrayList;
+@Data
 public class RootDto {
-    public int page;
-    public ArrayList<MoviesSeriesInitDto> results;
-    public int total_pages;
-    public int total_results;
+    private int page;
+    private ArrayList<MovieDto> results;
+    private int total_pages;
+    private int total_results;
 
     @Override
     public String toString() {
