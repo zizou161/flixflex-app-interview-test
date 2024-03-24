@@ -1,16 +1,18 @@
 package com.factorydigital.flixflex.userProfile;
 
 import com.factorydigital.flixflex.movie.Movie;
+import com.factorydigital.flixflex.tvShow.TvShow;
 import com.factorydigital.flixflex.user.UserDetails;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "user_profile")
-public class UserPofile {
+public class UserProfile implements Serializable {
 
     @Id
     @GeneratedValue
@@ -29,11 +31,19 @@ public class UserPofile {
     )
     List<Movie> favoriteMovies;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "profile_favorite_tv_shows",
+            joinColumns = @JoinColumn(name = "profile_id"),
+            inverseJoinColumns = @JoinColumn(name = "tv_show_id")
+    )
+    List<TvShow> favoriteTvShows;
 
-    public UserPofile(String profileName) {
+
+    public UserProfile(String profileName) {
         this.profileName = profileName;
     }
 
-    public UserPofile() {
+    public UserProfile() {
     }
 }

@@ -9,6 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserProfileService {
@@ -16,17 +19,23 @@ public class UserProfileService {
     private final UserProfileRepository userProfileRepository;
     private final MovieRepository movieRepository;
 
-    public UserPofile addMovieToFavorites(Long movieId) {
+
+    public UserProfile addMovieToFavorites(Long movieId) throws UserPrincipalNotFoundException {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
+        UserProfile userProfile = getCurrentUserProfile().orElseThrow(() -> new UserPrincipalNotFoundException("user not found"));
+        userProfile.getFavoriteMovies().add(movie);
+        return userProfileRepository.save(userProfile);
+    }
 
+    public Optional<UserProfile> getCurrentUserProfile() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
+        if (auth == null) {
+            return Optional.empty();
+        } else {
             UserDetails user = (UserDetails) auth.getPrincipal();
-            UserPofile userPofile = user.getUserPofile();
-            userPofile.getFavoriteMovies().add(movie);
-            return userProfileRepository.save(userPofile);
+            UserProfile userProfile = user.getUserProfile();
+            return Optional.of(userProfile);
         }
-        return null;
     }
 }

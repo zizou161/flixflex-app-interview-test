@@ -4,7 +4,7 @@ import com.factorydigital.flixflex.config.JwtService;
 import com.factorydigital.flixflex.user.Role;
 import com.factorydigital.flixflex.user.UserDetails;
 import com.factorydigital.flixflex.user.UserDetailsRepository;
-import com.factorydigital.flixflex.userProfile.UserPofile;
+import com.factorydigital.flixflex.userProfile.UserProfile;
 import com.factorydigital.flixflex.userProfile.UserProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,9 +31,9 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        UserPofile userPofile = new UserPofile("default profile");
-        userPofile.setUserDetails(user);
-        user.setUserPofile(userPofile);
+        UserProfile userProfile = new UserProfile("default profile");
+        userProfile.setUserDetails(user);
+        user.setUserProfile(userProfile);
         userDetailsRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationReponse.builder()

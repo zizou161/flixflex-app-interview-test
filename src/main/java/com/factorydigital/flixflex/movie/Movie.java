@@ -3,10 +3,12 @@ package com.factorydigital.flixflex.movie;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "movie")
-public class Movie {
+public class Movie implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

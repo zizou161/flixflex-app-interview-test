@@ -2,10 +2,11 @@ package com.factorydigital.flixflex.movie;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Data
-public class MovieDto {
+public class MovieDto implements Serializable {
 
     private boolean adult;
     private String backdrop_path;

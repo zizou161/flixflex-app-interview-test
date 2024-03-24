@@ -2,10 +2,11 @@ package com.factorydigital.flixflex.tvShow;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Data
-public class TvShowDto {
+public class TvShowDto implements Serializable {
 
     private Boolean adult;
     private String backdrop_path;

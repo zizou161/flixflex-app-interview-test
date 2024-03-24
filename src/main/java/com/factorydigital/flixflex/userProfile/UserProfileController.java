@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+
 @RestController
 @RequestMapping("api/v1/user-profile")
 @RequiredArgsConstructor
 public class UserProfileController {
 
     private final UserProfileService userProfileService;
+    private final UserProfileMapper userProfileMapper;
 
     @GetMapping(path = "/add-favorites")
     @SecurityRequirement(name = "Bearer Authorization")
     @Operation(summary = "add a movie to favorite list")
-    public ResponseEntity<UserPofile> addMovieToFavorites(@RequestParam Long movieId) {
-        return ResponseEntity.ok(userProfileService.addMovieToFavorites(movieId));
+    public ResponseEntity<UserProfileDto> addMovieToFavorites(@RequestParam Long movieId) throws UserPrincipalNotFoundException {
+        return ResponseEntity.ok(userProfileMapper.toDto(userProfileService.addMovieToFavorites(movieId)));
     }
 }
