@@ -31,7 +31,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     UserPofile userPofile;
 
     @Override

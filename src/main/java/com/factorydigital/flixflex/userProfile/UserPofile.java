@@ -21,7 +21,7 @@ public class UserPofile {
     @OneToOne
     private UserDetails userDetails;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "profile_favorite_movies",
             joinColumns = @JoinColumn(name = "profile_id"),
