@@ -19,10 +19,17 @@ public class UserProfileController {
     private final UserProfileService userProfileService;
     private final UserProfileMapper userProfileMapper;
 
-    @GetMapping(path = "/add-favorites")
+    @GetMapping(path = "/add-movie-to-favorites")
     @SecurityRequirement(name = "Bearer Authorization")
     @Operation(summary = "add a movie to favorite list")
     public ResponseEntity<UserProfileDto> addMovieToFavorites(@RequestParam Long movieId) throws UserPrincipalNotFoundException {
         return ResponseEntity.ok(userProfileMapper.toDto(userProfileService.addMovieToFavorites(movieId)));
+    }
+
+    @GetMapping(path = "/add-tvShow-to-favorites")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "add a tvShow to favorite list")
+    public ResponseEntity<UserProfileDto> addTvShowToFavorites(@RequestParam Long tvShowId) throws UserPrincipalNotFoundException {
+        return ResponseEntity.ok(userProfileMapper.toDto(userProfileService.addTvShowToFavorites(tvShowId)));
     }
 }
