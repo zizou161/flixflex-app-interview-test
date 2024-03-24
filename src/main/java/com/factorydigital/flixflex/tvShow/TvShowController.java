@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/tv-shows")
@@ -33,8 +30,15 @@ public class TvShowController {
 
     @GetMapping(path = "/paged")
     @SecurityRequirement(name = "Bearer Authorization")
-    @Operation(summary = "returns list of tv shows paged")
+    @Operation(summary = "returns list of series paged")
     public ResponseEntity<Page<TvShow>> getTvShowsPaged(@RequestParam int pageNum) {
         return ResponseEntity.ok(tvShowService.getTvShowsPaged(pageNum));
+    }
+
+    @GetMapping("/{tvShowId}")
+    @SecurityRequirement(name = "Bearer Authorization")
+    @Operation(summary = "returns details of a series")
+    public ResponseEntity<TvShow> getAll(@PathVariable(name = "tvShowId") Long tvShowId) {
+        return ResponseEntity.ok(tvShowService.getTvShow(tvShowId));
     }
 }

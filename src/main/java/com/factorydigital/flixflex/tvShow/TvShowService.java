@@ -23,4 +23,8 @@ public class TvShowService {
         PageRequest pageRequest = PageRequest.of(pageNum, 10);
         return tvShowsRepository.findAll(pageRequest);
     }
+
+    public TvShow getTvShow(Long tvShowId) {
+        return tvShowsRepository.findById(tvShowId).orElse(null);
+    }
 }
