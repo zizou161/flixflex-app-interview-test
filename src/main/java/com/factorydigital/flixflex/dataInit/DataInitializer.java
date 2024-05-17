@@ -15,7 +15,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -40,9 +39,14 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (movieRepository.count() == 0) {
-            List<Movie> movies = fetchMovies().stream()
-                    .map(movieMapper::toEntity)
-                    .peek(e -> e.setTrailerUrl(fetchMoviesTrailerUrl(e.getId()))).toList();
+            List<Movie> movies = null;
+            List<MovieDto> movieDtos = fetchMovies();
+            if (!movieDtos.isEmpty()) {
+                movies = movieDtos.stream()
+                        .map(movieMapper::toEntity)
+                        .peek(e -> e.setTrailerUrl(fetchMoviesTrailerUrl(e.getId()))).toList();
+            }
+            assert movies != null;
             movieRepository.saveAll(movies);
         }
         if (tvShowsRepository.count() == 0) {
@@ -52,14 +56,14 @@ public class DataInitializer implements CommandLineRunner {
 
     }
 
-    public ArrayList<MovieDto> fetchMovies() {
+    public List<MovieDto> fetchMovies() {
         String moviesApiUrl = String.format(IMDB_API_URL, "movie");
         MovieRootDto data = restTemplate.getForObject(moviesApiUrl, MovieRootDto.class);
         assert data != null;
         return data.getResults();
     }
 
-    public ArrayList<TvShowDto> fetchTvShows() {
+    public List<TvShowDto> fetchTvShows() {
         String tvShowsApiUrl = String.format(IMDB_API_URL, "tv");
         TvShowRootDto data = restTemplate.getForObject(tvShowsApiUrl, TvShowRootDto.class);
         assert data != null;
@@ -69,9 +73,8 @@ public class DataInitializer implements CommandLineRunner {
     public String fetchMoviesTrailerUrl(Long movieId) {
         String movieFetchVideoUrl = String.format(IMDB_TRAILER_VIDEOS_URL, movieId);
         VideoRootDto data = restTemplate.getForObject(movieFetchVideoUrl, VideoRootDto.class);
-        System.out.println("the fetching url is ==> " + movieFetchVideoUrl);
         assert data != null;
-        VideoDto videoDto = data.getResults().stream().filter(e -> e.site.equalsIgnoreCase("YouTube") && e.type.equalsIgnoreCase("Trailer")).findFirst().get();
-        return String.format(YOUTUBE_URL, videoDto.key);
+        VideoDto videoDto = data.getResults().stream().filter(e -> e.site.equalsIgnoreCase("YouTube") && e.type.equalsIgnoreCase("Trailer")).findFirst().orElse(null);
+        return videoDto != null ? String.format(YOUTUBE_URL, videoDto.key) : "";
     }
 }

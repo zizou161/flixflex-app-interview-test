@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,7 +22,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 public class ApplicationConfig {
 
     private final UserDetailsRepository repository;
-    @Value("${api.key}")
+    @Value("${API_KEY}")
     private String apiKey;
 
     @Bean
