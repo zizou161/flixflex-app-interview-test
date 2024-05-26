@@ -9,9 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -28,15 +25,6 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf().disable()
-                .cors(corsConfigurer -> corsConfigurer.configurationSource(
-                        request -> {
-                            var cors = new CorsConfiguration();
-                            cors.setAllowedOrigins(List.of("https://flixflex-backend-app-production.up.railway.app"));
-                            cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                            cors.setAllowedHeaders(List.of("*"));
-                            return cors;
-                        }
-                ))
                 .authorizeHttpRequests()
                 .requestMatchers(WHITE_LIST_URL)
                 .permitAll()

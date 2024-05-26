@@ -17,6 +17,7 @@ public class CorsConfig {
         config.addAllowedOrigin("https://flixflex-backend-app-production.up.railway.app"); // Replace with your actual domain
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.addAllowedOriginPattern(".*railway.app");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
