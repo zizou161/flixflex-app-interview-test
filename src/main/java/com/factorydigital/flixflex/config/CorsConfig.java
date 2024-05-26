@@ -13,8 +13,8 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(false);
-        config.addAllowedOrigin("*"); // Replace with your actual domain
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("https://flixflex-backend-app-production.up.railway.app"); // Replace with your actual domain
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
