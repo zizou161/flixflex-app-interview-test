@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://flixflex-backend-app-production.up.railway.app") // Update with your Railway app domain
+                .allowedOrigins("http://flixflex-backend-app-production.up.railway.app") // Update with your Railway app domain
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://flixflex-backend-app-production.up.railway.app") // Update with your Railway app domain
+                        .allowedOrigins("http://flixflex-backend-app-production.up.railway.app") // Update with your Railway app domain
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
