@@ -30,8 +30,8 @@ public class SecurityConfiguration {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
-                "https://flixflex-backend-app-production.up.railway.app",
-                "https://flixflex-backend-app-production.up.railway.app/swagger-ui/index.html"
+                "http://flixflex-backend-app-production.up.railway.app",
+                "http://flixflex-backend-app-production.up.railway.app/swagger-ui/index.html"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                 .cors(corsConfigurer -> corsConfigurer.configurationSource(
                         request -> {
                             var cors = new CorsConfiguration();
-                            cors.setAllowedOrigins(List.of("https://flixflex-backend-app-production.up.railway.app"));
+                            cors.setAllowedOrigins(List.of("http://flixflex-backend-app-production.up.railway.app"));
                             cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                             cors.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
                             return cors;
