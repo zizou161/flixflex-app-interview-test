@@ -31,7 +31,8 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "http://flixflex-backend-app-production.up.railway.app",
-                "http://flixflex-backend-app-production.up.railway.app/swagger-ui/index.html"
+                "http://flixflex-backend-app-production.up.railway.app/swagger-ui/index.html",
+                "localhost:8080"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
@@ -39,13 +40,16 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .cors(corsConfigurer -> corsConfigurer.configurationSource(
                         request -> {
                             var cors = new CorsConfiguration();
-                            cors.setAllowedOrigins(List.of("http://flixflex-backend-app-production.up.railway.app"));
+                            cors.setAllowedOrigins(List.of(
+                                    "http://flixflex-backend-app-production.up.railway.app",
+                                    "localhost:8080"));
                             cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                             cors.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
                             return cors;
