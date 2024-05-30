@@ -4,6 +4,7 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,7 @@ public class SwaggerConfig {
                                 .scheme("bearer")
                                 .bearerFormat("JWT")
                                 .name("Authorization")))
-                .info(new Info().title("/api/v1/").version("1.0.0"));
+                .info(new Info().title("/api/v1/").version("1.0.0"))
+                .addServersItem(new Server().url("https://flixflex-backend-app-production.up.railway.app"));
     }
 }
