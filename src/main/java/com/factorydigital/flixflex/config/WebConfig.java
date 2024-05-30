@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://flixflex-backend-app-production.up.railway.app") // Replace with your actual origin
+                .allowedOrigins("https://flixflex-backend-app-production.up.railway.app") // Replace with your actual origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
