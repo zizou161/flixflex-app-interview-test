@@ -1,8 +1,7 @@
-## flixflex-backend-interview-test
+## flixflex-backend-app
 
 
 A backend app for managing movies and series includes user authentication and different CRUD essential parts (paging, sorting ...etc).
-The app is for interview test requested by FactoryDigital.
 
 ## Requirements
 - Java 17.
